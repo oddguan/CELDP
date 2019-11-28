@@ -10,9 +10,4 @@ class Leaf:
 
     def predict(self, X):
         X = np.atleast_2d(X)
-        output = np.zeros(X.shape[0])
-        output[:] = self.val
-        return output
-
-    def setPredict(self, X, output, index):
-        output[index] = self.val
+        return np.full(X.shape(0), self.val)
