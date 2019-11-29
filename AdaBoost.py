@@ -11,8 +11,7 @@ class Adaboost_Classifier(object):
         self.base_tree = DecisionTree(epsilon=epsilon / number, min_sample=min_sample, depth=depth)
 
     def boost(self, weight_of_sample, X, y):
-        tree = clone(self.base_tree)
-        decision_tree_classifier = tree
+        decision_tree_classifier = clone(self.base_tree)
         decision_tree_classifier.fit(X, y, weight_of_sample)
         predictions_y = decision_tree_classifier.predict(X)
         predictions_y = [0.0 if predict <= 0.0 else 1.0 for predict in predictions_y]
@@ -20,7 +19,7 @@ class Adaboost_Classifier(object):
         tau_t = np.dot(weight_of_sample, misclassification) / np.sum(weight_of_sample)
         n_t = 0.5 * np.log((1 - tau_t) / max(tau_t, 1e-16))
         new_weight = weight_of_sample * np.exp(n_t * misclassification)
-        return tree, new_weight, n_t
+        return decision_tree_classifier, new_weight, n_t
 
     def fit(self, X, y):
         weight_of_sample = np.ones(X.shape[0]) / X.shape[0]
