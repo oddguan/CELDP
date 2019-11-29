@@ -4,11 +4,11 @@ from DecisionTree import DecisionTree
 
 class Adaboost_Classifier(object):
 
-    def __init__(self, number, min_sample, depth, epsilon):
+    def __init__(self, number, depth, epsilon, min_sample=1):
         self.learners = []
         self.number_of_learners = number
         self.weight_of_learners = np.zeros(self.number_of_learners)
-        self.base_tree = DecisionTree(epsilon=epsilon / number, min_sample = min_sample, depth = depth)
+        self.base_tree = DecisionTree(epsilon=epsilon / number, min_sample=min_sample, depth=depth)
 
     def boost(self, weight_of_sample, X, y):
         tree = clone(self.base_tree)
