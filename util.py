@@ -45,9 +45,31 @@ def load_dataset(file):
         y.append(float(line[-1]))
     return np.array(X), np.array(y)
 
+
 def get_weight(w):
     result = []
     for w_p in w:
         F_p = w_p / np.sum(w)
         result.append(F_p)
     return result
+
+
+def horizontal_split_data(X, y, part=5):
+    if part == 1:
+        return X, y
+    else:
+        n = X.shape[0]
+        random.seed(114514)
+        values = random.sample(range(1, n), part - 1)
+        values.sort()
+        values.append(n)
+        k = 0
+        j = 0
+        result_X = {}
+        result_y = {}
+        for i in values:
+            result_X[j] = X[k:i]
+            result_y[j] = y[k:i]
+            k = i
+            j += 1
+        return result_X, result_y
