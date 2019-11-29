@@ -29,3 +29,25 @@ def get_laplace(epsilon):
     b = 1.0 / epsilon
     a = random.uniform(-0.5, 0.5)
     return mu - b * sign(a) * math.log(1 - 2 * abs(a))
+
+
+def load_dataset(file):
+    f = open(file)
+    n = len(f.readline().split(','))
+    X = []
+    y = []
+    for line in f.readlines():
+        curr_X = []
+        line = line.strip().split(',')
+        for i in range(n - 1):
+            curr_X.append(float(line[i]))
+        X.append(curr_X)
+        y.append(float(line[-1]))
+    return np.array(X), np.array(y)
+
+def get_weight(w):
+    result = []
+    for w_p in w:
+        F_p = w_p / np.sum(w)
+        result.append(F_p)
+    return result
