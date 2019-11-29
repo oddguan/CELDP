@@ -1,11 +1,10 @@
 import numpy as np
-import sys
 import math
 from util import load_dataset, horizontal_split_data, get_weight
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import roc_auc_score, f1_score, accuracy_score
 
-from AdaBoost import Adaboost_Classifier
+from AdaBoost_DP.AdaBoost import Adaboost_Classifier
 
 class Collaborative_AdaBoost_DP(object):
     def __init__(self, number, depth, epsilon, train_set, test_set, part):
